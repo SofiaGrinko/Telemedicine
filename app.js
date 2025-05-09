@@ -812,53 +812,28 @@ function toggleDischarge(element) {
     }
 }
 
+// Создание карточки консультации
 function createConsultationCard(consultation, isUpcoming) {
     const now = new Date();
     const consultationTime = new Date(`${consultation.date}T${consultation.time}`);
     const isMissed = consultation.status === 'upcoming' && consultationTime <= now;
     
-    if (isMissed) {
-        consultation.status = 'missed';
-    }
+    if (isMissed) consultation.status = 'missed';
 
     const card = document.createElement('div');
     card.classList.add('consultation-card');
     card.id = `consultationCard-${consultation.id}`;
 
-    if (consultation.status === 'canceled') {
-        card.classList.add('canceled');
-    } else if (consultation.status === 'completed') {
-        card.classList.add('completed');
-    } else if (consultation.status === 'missed') {
-        card.classList.add('missed');
-    }
+    if (consultation.status === 'canceled') card.classList.add('canceled');
+    else if (consultation.status === 'completed') card.classList.add('completed');
+    else if (consultation.status === 'missed') card.classList.add('missed');
 
     const role = localStorage.getItem('role');
-    const otherPerson = role === 'doctor' ? consultation.patientName : consultation.doctor;
-    const statusText = getStatusText(consultation.status);
+    const otherPerson = role === 'doctor' 
+        ? consultation.patientDisplayName 
+        : consultation.doctorDisplayName;
 
-    // Формируем HTML для заметок
-    let notesHtml = '';
-    if (consultation.notes && consultation.notes.length > 0) {
-        notesHtml = `
-            <div class="notes-section">
-                <details>
-                    <summary class="notes-summary">Показать заметки (${consultation.notes.length})</summary>
-                    <ul class="notes-list">
-                        ${consultation.notes.map(note => `
-                            <li class="note-item">
-                                <div class="note-header">
-                                    <span class="note-date">${new Date(note.createdAt).toLocaleString('ru-RU')}</span>
-                                    ${note.addedBy ? `<span class="note-author">Добавил: ${note.addedBy}</span>` : ''}
-                                </div>
-                                <div class="note-text">${note.text}</div>
-                            </li>
-                        `).join('')}
-                    </ul>
-                </details>
-            </div>
-        `;
-    }
+    const statusText = getStatusText(consultation.status);
 
     card.innerHTML = `
         <div class="consultation-header">
@@ -869,37 +844,17 @@ function createConsultationCard(consultation, isUpcoming) {
         <p class="consultation-time">${consultation.time}</p>
 
         ${isUpcoming && consultation.status === 'upcoming' 
-            ? `<div class="consultation-buttons">
-                  <a href="${consultation.meetLink}" target="_blank" class="meet-link">Присоединиться</a>
-                  ${role === 'doctor' ? `<button onclick="showNoteForm('${consultation.id}')" class="note-btn" title="Добавить заметку">📝</button>` : ''}
-               </div>`
-            : ''
-        }
+            ? `<a href="${consultation.meetLink}" target="_blank" class="meet-link">Присоединиться</a>` 
+            : ''}
 
         <div class="consultation-actions">
-            ${
-                isUpcoming && consultation.status === 'upcoming'
-                    ? (role === 'doctor' ? `
-                        <button onclick="cancelConsultation('${consultation.id}')" class="cancel-btn">Отменить</button>
-                        <button onclick="showDischargeForm('${consultation.id}')" class="complete-btn">Завершить</button>
-                    ` : `<button onclick="cancelConsultation('${consultation.id}')" class="cancel-btn">Отменить</button>`)
-                    : ''
-            }
+            ${isUpcoming && consultation.status === 'upcoming'
+                ? (role === 'doctor' 
+                    ? `<button onclick="cancelConsultation('${consultation.id}')" class="cancel-btn">Отменить</button>
+                       <button onclick="showDischargeForm('${consultation.id}')" class="complete-btn">Завершить</button>`
+                    : `<button onclick="cancelConsultation('${consultation.id}')" class="cancel-btn">Отменить</button>`)
+                : ''}
         </div>
-
-        ${role === 'doctor' && isUpcoming && consultation.status === 'upcoming'
-            ? `<div id="noteForm-${consultation.id}" class="note-form" style="display: none;">
-                  <textarea id="noteText-${consultation.id}" placeholder="Введите заметку..." rows="3"></textarea>
-                  <button onclick="addNote('${consultation.id}')" class="submit-note-btn">Сохранить заметку</button>
-              </div>
-              <div id="dischargeForm-${consultation.id}" class="discharge-form" style="display: none;">
-                  <textarea id="dischargeText-${consultation.id}" placeholder="Введите выписку..." rows="4"></textarea>
-                  <button onclick="submitDischarge('${consultation.id}')" class="submit-discharge-btn">Отправить выписку</button>
-              </div>`
-            : ''
-        }
-
-        ${notesHtml}
 
         ${consultation.status === 'completed' && consultation.dischargeText
             ? `<div class="discharge-info">
@@ -911,17 +866,9 @@ function createConsultationCard(consultation, isUpcoming) {
                       <p>${consultation.dischargeText}</p>
                   </div>
               </div>`
-            : ''
-        }
-
-        ${isUpcoming && consultation.status === 'upcoming' && role === 'doctor'
-            ? `<div id="discharge-history-${consultation.id}" class="discharge-history" style="margin-top: 10px;">
-                  <strong>История выписок:</strong>
-                  <em>Загружается...</em>
-              </div>`
-            : ''
-        }
+            : ''}
     `;
+
 
     if (isUpcoming && consultation.status === 'upcoming' && role === 'doctor') {
         const historyDiv = card.querySelector(`#discharge-history-${consultation.id}`);
