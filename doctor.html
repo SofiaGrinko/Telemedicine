@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кабинет врача | Телемедицина</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body onload="checkAuth()">
+    <button class="logout-btn" onclick="logout()">Выйти</button>
+    
+    <div class="container">
+        <div class="user-info">
+            Добро пожаловать, доктор <span id="usernameDisplay"></span>
+        </div><div id="doctorProfile" class="doctor-profile">
+    <!-- Информация о докторе -->
+</div>
+
+
+        <h2>Предстоящие консультации</h2>
+        <div class="consultation-section">
+            <div id="upcomingConsultations" class="consultation-list">
+                <!-- Предстоящие консультации будут здесь -->
+            </div>
+        </div>
+
+        <h2>История консультаций</h2>
+        <div class="consultation-section">
+            <div id="consultationHistory" class="consultation-list">
+                <!-- История консультаций будет здесь -->
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

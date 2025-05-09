@@ -1,0 +1,32 @@
+[
+  {
+    "username": "ivanov_i",
+    "fullName": "Иванов Иван Иванович",
+    "password": "1234",
+    "role": "doctor"
+  },
+  {
+    "username": "petrov_v",
+    "fullName": "Петров Василий Владимирович",
+    "password": "1234",
+    "role": "doctor"
+  },
+  {
+    "username": "bykov_a",
+    "fullName": "Быков Алексей Евгеньевич",
+    "password": "1234",
+    "role": "doctor"
+  },
+  {
+    "username": "grinko_s",
+    "fullName": "Гринько Сергей Сергеевич",
+    "password": "1234",
+    "role": "patient"
+  },
+  {
+    "username": "zabugina_e",
+    "fullName": "Забугина Елена Александровна",
+    "password": "1234",
+    "role": "patient"
+  }
+]

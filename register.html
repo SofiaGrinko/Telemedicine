@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация | Телемедицина</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Регистрация пациента</h2>
+        <form id="registerForm">
+            <div class="form-group">
+                <label for="fullName">Логин:</label>
+                <input type="text" id="fullName" placeholder="Придумайте логин"required>
+            </div>
+
+            <div class="form-group">
+                <label for="newUsername">ФИО:</label>
+                <input type="text" id="newUsername" placeholder="Введите ваше полное имя"required>
+            </div>
+
+            <div class="form-group">
+                <label for="newPassword">Пароль:</label>
+                <input type="password" id="newPassword" placeholder="Придумайте пароль" required>
+            </div>
+
+            <button type="submit" class="primary-btn">Зарегистрироваться</button>
+            <p id="registerMessage" class="message"></p>
+            
+            <p class="login-link">Уже есть аккаунт? <a href="login.html">Войти</a></p>
+        </form>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

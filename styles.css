@@ -1,0 +1,912 @@
+:root {
+    --primary-color: #2d572c;
+    --primary-light: #4CAF50;
+    --secondary-color: #f0fff0;
+    --danger-color: #ff4d4d;
+    --danger-dark: #cc0000;
+    --warning-color: #ff9800;
+    --success-color: #4caf50;
+    --text-color: #333;
+    --light-gray: #f5f5f5;
+    --border-color: #b2d8b2;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    background-color: #f5f9f5;
+    margin: 0;
+    padding: 20px;
+    color: var(--text-color);
+}
+
+.container {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    width: 90%;
+    max-width: 1000px;
+    margin: 20px 0;
+}
+
+h2 {
+    color: var(--primary-color);
+    margin-top: 0;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+input, select, button {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+button {
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.primary-btn {
+    background-color: var(--primary-light);
+}
+
+.primary-btn:hover {
+    background-color: var(--primary-color);
+}
+
+.danger-btn {
+    background-color: var(--danger-color);
+}
+
+.danger-btn:hover {
+    background-color: var(--danger-dark);
+}
+
+.success-btn {
+    background-color: var(--success-color);
+}
+
+.success-btn:hover {
+    background-color: var(--primary-color);
+}
+
+.error-message {
+    color: var(--danger-color);
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* Консультации */
+.consultation-section {
+    margin: 30px 0;
+}
+
+.consultation-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.consultation-card {
+    background: var(--secondary-color);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s;
+}
+
+.consultation-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.consultation-card.canceled {
+    opacity: 0.7;
+    background-color: #fff0f0;
+}
+
+.consultation-card.completed {
+    background-color: #f0fff0;
+}
+
+.consultation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.consultation-status {
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-weight: bold;
+}
+
+.consultation-status[data-status="upcoming"] {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.consultation-status[data-status="completed"] {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.consultation-status[data-status="canceled"] {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.consultation-date {
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.consultation-time {
+    color: #555;
+    margin: 5px 0 15px;
+}
+
+.consultation-actions {
+    display: flex;
+    justify-content: center; /* Центрирует кнопки по горизонтали */
+    align-items: center;     /* Центрирует кнопки по вертикали */
+    width: 100%;             /* Убедитесь, что контейнер занимает всю ширину */
+    margin-top: 10px;
+}
+
+.meet-link {
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background 0.3s;
+    display: flex;              /* Используем flexbox для центрирования */
+    justify-content: center;    /* Центрирует по горизонтали */
+    align-items: center;        /* Центрирует по вертикали */
+    text-align: center;         /* Центрирует текст внутри кнопки */
+    width: auto;                /* Ширина кнопки подстраивается под содержимое */
+}
+
+.meet-link:hover {
+    background-color: var(--primary-light);
+    color: white;
+}
+
+
+
+
+.no-consultations {
+    text-align: center;
+    color: #777;
+    font-style: italic;
+    padding: 20px;
+}
+
+/* Форма записи */
+.appointment-form {
+    background: var(--light-gray);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 30px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Кнопка выхода */
+.logout-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: var(--danger-color);
+    color: white;
+    font-size: 14px;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+    transition: all 0.3s;
+    width: auto;
+    z-index: 1000;
+}
+
+.logout-btn:hover {
+    background-color: var(--danger-dark);
+    transform: scale(1.05);
+}
+
+/* Информация о пользователе */
+.user-info {
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-size: 18px;
+    padding: 10px;
+    background: var(--light-gray);
+    border-radius: 5px;
+}
+
+/* Сообщения */
+.message {
+    margin: 15px 0;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.success-message {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Ссылки */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: var(--primary-light);
+    text-decoration: underline;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 15px;
+    }
+    
+    .consultation-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Добавим эти стили в конец файла */
+
+/* Стили для select */
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 1em;
+    padding-right: 2em;
+}
+
+/* Стили для options */
+option {
+    padding: 10px;
+}
+
+/* Стили для загрузки */
+.loading {
+    color: #666;
+    font-style: italic;
+}
+
+/* Добавьте эти стили в ваш файл styles.css */
+
+/* Стили для кнопки "Завершить" */
+.complete-btn {
+    background-color: #e8f5e9; /* Светло-зеленый фон */
+    color: #2e7d32; /* Темно-зеленый текст */
+    border: 1px solid #2e7d32;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.complete-btn:hover {
+    background-color: #2e7d32; /* Темно-зеленый фон при наведении */
+    color: white; /* Белый текст при наведении */
+}
+
+/* Стили для кнопки "Отменить" */
+.cancel-btn {
+    background-color: #ffebee; /* Светло-красный фон */
+    color: #c62828; /* Темно-красный текст */
+    border: 1px solid #c62828;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.discharge-form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+}
+
+.discharge-form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    resize: vertical;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+    background-color: #fff;
+    transition: border-color 0.3s ease;
+}
+
+.discharge-form textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.submit-discharge-btn {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.submit-discharge-btn:hover {
+    background-color: #218838;
+}
+
+.submit-discharge-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+textarea::placeholder {
+    color: #888;
+}
+
+
+.cancel-btn:hover {
+    background-color: #c62828; /* Темно-красный фон при наведении */
+    color: white; /* Белый текст при наведении */
+}
+
+/* Дополнительные стили для контейнера кнопок */
+.consultation-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+
+/* Стили для истории консультаций */
+#consultationHistory .consultation-card {
+    background-color: #f5f5f5; /* Серый фон */
+    border-left: 4px solid #ccc; /* Серая левая граница для визуального разделения */
+}
+
+#consultationHistory .consultation-card:hover {
+    background-color: #e0e0e0; /* Немного темнее при наведении */
+    transform: none; /* Убираем трансформацию при наведении */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Более тонкая тень */
+}
+
+/* Сохраняем стили статусов, но делаем их менее яркими */
+#consultationHistory .consultation-status[data-status="completed"] {
+    background-color: #e0e0e0;
+    color: #555;
+}
+
+#consultationHistory .consultation-status[data-status="canceled"] {
+    background-color: #e0e0e0;
+    color: #555;
+}
+
+/* Стили для текста в истории */
+#consultationHistory .consultation-date,
+#consultationHistory .consultation-time {
+    color: #666;
+}
+
+/* Скрываем кнопки действий в истории */
+#consultationHistory .consultation-actions {
+    display: none;
+}
+
+
+/* Стили для выписки */
+.discharge-info {
+    margin-top: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid #e9ecef;
+}
+
+.discharge-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.discharge-header:hover {
+    background-color: #e9ecef;
+    border-radius: 5px;
+}
+
+.discharge-toggle {
+    font-size: 1.2em;
+    transition: transform 0.2s;
+}
+
+.discharge-header:hover .discharge-toggle {
+    transform: scale(1.1);
+}
+
+.discharge-content {
+    padding: 10px;
+    margin-top: 8px;
+    border-top: 1px solid #dee2e6;
+    display: none;
+    animation: fadeIn 0.3s ease-out;
+}
+/* Стили для истории выписок */
+.discharge-history {
+    margin-top: 15px;
+    font-family: Arial, sans-serif;
+}
+
+.discharge-history-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.discharge-history-item {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.discharge-history-item:hover {
+    background-color: #f1f1f1;
+}
+
+.discharge-history-header {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.discharge-history-note {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #555;
+}
+/* Общий стиль для спойлеров */
+details {
+    margin: 8px 0;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 8px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+details[open] {
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+details summary {
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1em;  /* Уменьшено */
+    padding: 4px 8px; /* Уменьшено */
+    border-radius: 4px;
+    background-color: #e1f7d5;
+    color: #00796b;
+    transition: background-color 0.3s ease;
+}
+
+details summary:hover {
+    background-color: #cad6c9;
+}
+
+/* Текст выписки */
+.note-text {
+    font-size: 0.9em;  /* Уменьшено */
+    margin-top: 6px;  /* Уменьшено */
+    line-height: 1.4; /* Уменьшено */
+    color: #333;
+}
+
+/* Стиль для главного спойлера */
+.spoiler-summary {
+    font-size: 1em;  /* Уменьшено */
+    color: #004d40;
+    background-color: #c8e6c9;
+    border-radius: 6px;
+    padding: 6px 10px; /* Уменьшено */
+    cursor: pointer;
+    text-align: center;
+}
+
+.spoiler-summary:hover {
+    background-color: #a5d6a7;
+}
+
+/* Эффект для текста "Загружается..." */
+em {
+    font-style: italic;
+    color: #555;
+    font-size: 0.9em;  /* Уменьшено */
+}
+
+
+.discharge-content p {
+    margin: 0;
+    white-space: pre-line;
+    line-height: 1.5;
+    color: #495057;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.consultation-card.missed {
+    background-color: #CD5C5C; /* Серый фон */
+    border-left: 4px solid #ffcdd2; /* Светло-красный бордер */
+}
+
+.consultation-status[data-status="missed"] {
+    background-color: #ffcdd2; /* Светло-красный фон лейбла */
+    color: #b71c1c; /* Темно-красный текст */
+}
+
+#consultationHistory .consultation-card.missed {
+    background-color: #e0e0e0; /* Серый фон */
+    opacity: 0.8;
+}
+
+#consultationHistory .consultation-status[data-status="missed"] {
+    background-color: #ffcdd2; /* Светло-красный фон */
+    color: #b71c1c; /* Темно-красный текст */
+}
+
+
+/* Стили для формы завершения консультации */
+.discharge-form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+}
+
+.discharge-form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    resize: vertical;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+    background-color: #fff;
+    transition: border-color 0.3s ease;
+}
+
+.discharge-form textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.submit-discharge-btn {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.submit-discharge-btn:hover {
+    background-color: #218838;
+}
+
+.submit-discharge-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Стили для истории выписок */
+.discharge-history {
+    margin-top: 15px;
+    font-family: Arial, sans-serif;
+}
+
+.discharge-history-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.discharge-history-item {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.discharge-history-item:hover {
+    background-color: #f1f1f1;
+}
+
+.discharge-history-header {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.discharge-history-note {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #555;
+}
+
+/* Общие стили для спойлеров */
+details {
+    margin: 8px 0;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 8px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+details[open] {
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+details summary {
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1em;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background-color: #e1f7d5;
+    color: #00796b;
+    transition: background-color 0.3s ease;
+}
+
+details summary:hover {
+    background-color: #cad6c9;
+}
+
+.spoiler-summary {
+    font-size: 1em;
+    color: #004d40;
+    background-color: #c8e6c9;
+    border-radius: 6px;
+    padding: 6px 10px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.spoiler-summary:hover {
+    background-color: #a5d6a7;
+}
+
+.note-text {
+    font-size: 0.9em;
+    margin-top: 6px;
+    line-height: 1.4;
+    color: #333;
+    white-space: pre-wrap;
+}
+
+/* Стили для кнопок консультации */
+.consultation-buttons {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.meet-link {
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: all 0.3s;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.meet-link:hover {
+    background-color: var(--primary-light);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.note-btn {
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    background-color: #ffc107;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.note-btn:hover {
+    background-color: #ffab00;
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Стили для формы заметки */
+.note-form {
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+    border: 1px solid #e0e0e0;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.note-form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    resize: vertical;
+    margin-bottom: 10px;
+    min-height: 80px;
+    font-family: inherit;
+    transition: border-color 0.3s;
+}
+
+.note-form textarea:focus {
+    border-color: #ffc107;
+    outline: none;
+}
+
+.submit-note-btn {
+    background-color: #ffc107;
+    color: #000;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: bold;
+}
+
+.submit-note-btn:hover {
+    background-color: #ffab00;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.note-text,
+.discharge-content p,
+.discharge-history-item .note-text {
+  max-height: 200px;            /* ограничиваем высоту */
+  overflow: auto;               /* прокрутка при необходимости */
+  white-space: pre-wrap;        /* сохраняем переносы строк */
+  word-wrap: break-word;        /* перенос длинных слов */
+  padding: 8px;
+  background-color: #f6f6f6;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.notes-list {
+  padding-left: 20px;
+}
+
+.note-item {
+  margin-bottom: 10px;
+}
+
+
+.consultation-card {
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 16px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.note-form,
+.discharge-form {
+  margin-top: 10px;
+}
+
+.note-form textarea,
+.discharge-form textarea {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  resize: vertical;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-family: inherit;
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кабинет пациента | Телемедицина</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body onload="checkAuth()">
+    <button class="logout-btn" onclick="logout()">Выйти</button>
+    
+    <div class="container">
+        <div class="user-info">
+            Добро пожаловать, <span id="usernameDisplay"></span>
+        </div>
+
+        <h2>Предстоящие консультации</h2>
+        <div class="consultation-section">
+            <div id="upcomingConsultations" class="consultation-list">
+                <!-- Предстоящие консультации будут здесь -->
+            </div>
+        </div>
+
+        <h2>История консультаций</h2>
+        <div class="consultation-section">
+            <div id="consultationHistory" class="consultation-list">
+                <!-- История консультаций будет здесь -->
+            </div>
+        </div>
+
+        <h2>Записаться на консультацию</h2>
+        <form id="appointmentForm" class="appointment-form" onsubmit="bookAppointment(event)">
+            <div class="form-group">
+                <label for="doctorSelect">Выберите врача:</label>
+                <select id="doctorSelect" required>
+                    <option value="" disabled selected>-- Загрузка врачей... --</option>
+                </select>
+                <div id="doctorInfo" class="doctor-info"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="appointmentDate">Дата консультации:</label>
+                <input type="date" id="appointmentDate" required>
+                <small id="dateHelp" class="form-help">Выберите врача и дату для отображения доступного времени</small>
+            </div>
+
+            <div class="form-group">
+                <label for="appointmentTime">Время консультации:</label>
+                <select id="appointmentTime" required>
+                    <option value="" disabled selected>-- Сначала выберите врача и дату --</option>
+                </select>
+                <small class="form-help">Длительность консультации - 30 минут</small>
+            </div>
+
+            <button type="submit" class="primary-btn">Записаться на консультацию</button>
+        </form>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
