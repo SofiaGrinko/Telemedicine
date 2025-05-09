@@ -33,8 +33,8 @@ function loadInitialData() {
                 { username: 'ivanov_i', fullName: 'Иванов Иван Иванович', password: '1234', role: 'doctor' },
                 { username: 'petrov_v', fullName: 'Петров Василий Владимирович', password: '1234', role: 'doctor' },
                 { username: 'bykov_a', fullName: 'Быков Алексей Евгеньевич', password: '1234', role: 'doctor' },
-                { username: 'grinko_s', fullName: 'Гринько Сергей Сергеевич', password: '1234', role: 'patient' },
-                { username: 'zabugina_e', fullName: 'Забугина Елена Александровна', password: '1234', role: 'patient' }
+                { username: 'grinko_s', fullName: 'Гринько Софья Сергеевна', password: '1234', role: 'patient' },
+                { username: 'zabugina_e', fullName: 'Забугина Екатерина Андреевна', password: '1234', role: 'patient' }
             ];
 
         consultations = fs.existsSync(CONSULTATIONS_FILE)
@@ -346,10 +346,19 @@ app.get('/api/consultations', authenticateToken, (req, res) => {
     let userConsultations = consultations.filter(c => 
         (user.role === 'doctor' && c.doctor === user.username) ||
         (user.role === 'patient' && c.patientName === user.username)
-    );
+    ).map(c => {
+        // Добавляем полные имена
+        const doctor = users.find(u => u.username === c.doctor);
+        const patient = users.find(u => u.username === c.patientName);
+        return {
+            ...c,
+            doctorDisplayName: doctor ? doctor.fullName : c.doctor,
+            patientDisplayName: patient ? patient.fullName : c.patientName
+        };
+    });
+    
     res.json(userConsultations);
 });
-
 // API для получения истории выписок
 app.get('/discharge-history', authenticateToken, (req, res) => {
     const { doctor, patientName } = req.query;
